@@ -1,0 +1,1 @@
+export const API_URL = 'https://clientes.api.greenborn.com.ar/public-random-word?c=15';

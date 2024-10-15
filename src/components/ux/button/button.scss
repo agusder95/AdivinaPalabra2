@@ -1,0 +1,33 @@
+.buttonWrapper{
+    &[btn-color ="green"]{
+        background-color: #BDD2A6;
+        color: black ;
+        &:active{
+            background-color: #646F58;
+        }
+    }
+    &[btn-color ="red"]{
+        background-color: #e97373;
+        color: black;
+        &:active{
+            background-color: #6A3937;
+        }
+    }
+    &[btn-color ="grey"]{
+        background-color: grey;
+        color: whitesmoke;
+    }
+
+    /* width: 150px; */
+    width: 100%;
+    height: 60px;
+    border: none;
+    border-radius: 10px;
+    padding: 0;
+    margin: 0;
+}
+
+/* 
+    background-color: #CFFFB0; para casillero verde
+    background-color: #e97373; para casillero rojo
+*/
