@@ -1,0 +1,25 @@
+.keyboardWrapper{
+    width: 100%;
+    .keyboardRow{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        padding: 0 5px;
+        .keyboardKey{
+            width: 60px;
+            height: 60px;
+            border: 1px solid ;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            &:active{
+                border: 3px solid;
+                border-radius: 5px;
+                color: black;
+                /* background-color: #f0f0f0; */
+            }
+        }
+    }
+}

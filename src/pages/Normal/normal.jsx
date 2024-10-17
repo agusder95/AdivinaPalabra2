@@ -3,9 +3,11 @@ import "./normal.scss";
 import useApi from "../../state/hooks/useApi";
 import { API_URL } from "../../state/constants/apiUrl";
 import MainContext from "../../context/mainContext";
+import Keyboard from "../../components/keyboard/keyboard";
+import Board from "../../components/board/board";
 
 const NormalMode = () => {
-    const LENGTH = 6;
+    const LENGTH = 5;
     const { data, loading, error } = useApi(API_URL, LENGTH);
     const { setState } = useContext(MainContext);
 
@@ -27,9 +29,8 @@ const NormalMode = () => {
     return (
         <div className="normalWrapper">
             <h1>Normal Mode</h1>
-            <p>
-                The word is: {data} with {LENGTH} letters
-            </p>
+            <Board/>
+            <Keyboard />
         </div>
     );
 };
