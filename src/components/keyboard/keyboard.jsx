@@ -10,24 +10,26 @@ const Keyboard = () => {
     ];
 
     const handleInput = (e) => {
-        if (e.target.innerText === "<-") {
+        const key = e.target.innerText;
+        if (key === "<-") {
+            const currentRow = state.board[state.board.length - 1] || [];
             setState((prevState) => ({
                 ...prevState,
-                usrInput: prevState.usrInput.slice(0, -1),
+                board: [...prevState.board.slice(0, -1), currentRow.slice(0, -1)],
             }));
-        } else {
-            setState((prevState) => ({
-                ...prevState,
-                usrInput: [...prevState.usrInput, e.target.innerText],
-            }));
+            return;
         }
+        const currentRow = state.board[state.board.length - 1] || [];
+        setState((prevState) => ({
+            ...prevState,
+            board: [...prevState.board.slice(0, -1), [...currentRow, key]],
+        }));
     };
 
     const handleEnter = (e) => {
         setState((prevState) => ({
             ...prevState,
-            board: [...prevState.board, prevState.usrInput],
-            usrInput: [],
+            board: [...prevState.board, []],
         }));
     };
 

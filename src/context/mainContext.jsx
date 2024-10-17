@@ -9,8 +9,7 @@ export const MainContextProvider = ({ children }) => {
         word: "",
         score: null,
         correctWords: null,
-        board: [],
-        usrInput: [],
+        board: [[]],
     };
 
     const [state, setState] = useState(initialState);
