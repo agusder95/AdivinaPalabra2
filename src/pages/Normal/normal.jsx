@@ -8,15 +8,17 @@ import Board from "../../components/board/board";
 
 const NormalMode = () => {
     const LENGTH = 5;
+    const maxRow = 5;
     const { data, loading, error } = useApi(API_URL, LENGTH);
     const { setState } = useContext(MainContext);
 
     useEffect(() => {
         if (data) {
+            let wordUpperCase = data.toUpperCase();
             setState((prevState) => ({
                 ...prevState,
                 typeGame: "normal",
-                word: data,
+                word: wordUpperCase,
                 score: 0,
                 correctWords: 0,
             }));
@@ -29,8 +31,8 @@ const NormalMode = () => {
     return (
         <div className="normalWrapper">
             <h1>Normal Mode</h1>
-            <Board/>
-            <Keyboard />
+            <Board rows={maxRow}/>
+            <Keyboard rows={maxRow}/>
         </div>
     );
 };

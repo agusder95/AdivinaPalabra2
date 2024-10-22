@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import "./keyboard.scss";
 import MainContext from "../../context/mainContext";
-const Keyboard = () => {
+const Keyboard = ({rows}) => {
     const { state, setState } = useContext(MainContext);
+    const [counterRows, setCounterRows] = useState(0);
     const keys = [
         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
         ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ"],
@@ -10,6 +11,9 @@ const Keyboard = () => {
     ];
 
     const handleInput = (e) => {
+        if (counterRows >= rows){
+            return;    
+        }
         const key = e.target.innerText;
         if (key === "<-") {
             const currentRow = state.board[state.board.length - 1] || [];
@@ -27,6 +31,11 @@ const Keyboard = () => {
     };
 
     const handleEnter = (e) => {
+        setCounterRows(counterRows+1)
+        if (counterRows >= rows) {
+            return;
+        }
+        console.log("b")
         setState((prevState) => ({
             ...prevState,
             board: [...prevState.board, []],

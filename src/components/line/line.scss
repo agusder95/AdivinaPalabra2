@@ -1,10 +1,10 @@
-.lineWrapper{
+.lineWrapper {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 
-    .letterContainer{
+    .letterContainer {
         width: 60px;
         height: 60px;
         display: flex;
@@ -14,22 +14,34 @@
         border: 1px solid black;
         background-color: rgb(231, 209, 197);
         color: black;
-        @media screen and (min-width: 768px){
+
+        &[color-board="T"] {
+            background-color: rgb(180, 226, 119);
+        }
+
+        &[color-board="F"] {
+            background-color: rgb(238, 114, 114);
+        }
+
+        &[color-board="R"] {
+            background-color: rgb(219, 189, 90);
+        }
+
+        @media screen and (min-width: 768px) {
             width: 80px;
-            height: 80px
+            height: 80px;
         }
 
-        @media screen and (min-width: 1024px){
+        @media screen and (min-width: 1024px) {
             width: 90px;
-            height: 90px
+            height: 90px;
         }
 
-        p{
+        p {
             font-size: 1.5rem;
-            @media screen and (min-width: 768px){
+            @media screen and (min-width: 768px) {
                 font-size: 2rem;
             }
-            
         }
     }
 }

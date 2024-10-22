@@ -10,6 +10,7 @@ export const MainContextProvider = ({ children }) => {
         score: null,
         correctWords: null,
         board: [[]],
+        colorBoard: [],
     };
 
     const [state, setState] = useState(initialState);
