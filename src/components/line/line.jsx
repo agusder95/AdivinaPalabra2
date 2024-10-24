@@ -24,14 +24,14 @@ const Line = ({ row, maxRows }) => {
                     ? state.board[maxRows - 1]
                     : state.board[row - 1];
             let evaluation = [];
-            console.log(
+            /* console.log(
                 "boardLength",
                 boardLength,
                 "maxRows",
                 maxRows,
                 "row",
                 row - 1
-            );
+            ); */
             word.forEach((letter, index) => {
                 if (letter === board[index]) {
                     evaluation.push("T");

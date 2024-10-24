@@ -1,20 +1,35 @@
-.keyboardWrapper{
+.keyboardWrapper {
     width: 100%;
-    .keyboardRow{
+    .keyboardRow {
         display: flex;
         justify-content: space-between;
         margin-bottom: 10px;
         padding: 0 5px;
-        .keyboardKey{
+        .keyboardKey {
             width: 60px;
             height: 60px;
-            border: 1px solid ;
+            border: 1px solid;
             border-radius: 5px;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            &:active{
+            background-color: #a5a5a5;
+            &[color-key="T"] {
+                background-color: #b4e277;
+                color: #3b3b3b;
+            }
+
+            &[color-key="F"] {
+                background-color: #3b3b3b;
+            }
+
+            &[color-key="R"] {
+                color: #3b3b3b;
+                background-color: #dbbd5a;
+            }
+
+            &:active {
                 border: 3px solid;
                 border-radius: 5px;
                 color: black;
