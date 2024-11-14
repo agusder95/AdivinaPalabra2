@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./keyboard.scss";
 import MainContext from "../../context/mainContext";
 
@@ -6,6 +6,7 @@ const Keyboard = ({ rows }) => {
     const { state, setState } = useContext(MainContext);
     const [colorKey, setColorKey] = useState({});
     const [counterRows, setCounterRows] = useState(0);
+
     const keys = [
         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
         ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ"],
@@ -14,13 +15,28 @@ const Keyboard = ({ rows }) => {
 
     const solution = state.word;
 
-    const handleInput = (e) => {
-        if (counterRows >= rows) {
-            return;
-        }
-        const key = e.target.innerText;
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            const key = e.key.toUpperCase();
+            if (key === "ENTER") {
+                handleEnter();
+            } else if (key === "BACKSPACE") {
+                handleInput("<-");
+            } else if (/^[A-ZÑ]$/.test(key)) {
+                handleInput(key);
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, [counterRows, state.board]);
+
+    const handleInput = (key) => {
+        if (counterRows >= rows) return;
+
+        const currentRow = state.board[state.board.length - 1] || [];
+
         if (key === "<-") {
-            const currentRow = state.board[state.board.length - 1] || [];
             setState((prevState) => ({
                 ...prevState,
                 board: [
@@ -28,10 +44,10 @@ const Keyboard = ({ rows }) => {
                     currentRow.slice(0, -1),
                 ],
             }));
-            return;
-        }
-        const currentRow = state.board[state.board.length - 1] || [];
-        if (solution.length > currentRow.length) {
+        } else if (
+            solution.length > currentRow.length ||
+            currentRow.length === 0
+        ) {
             setState((prevState) => ({
                 ...prevState,
                 board: [...prevState.board.slice(0, -1), [...currentRow, key]],
@@ -53,21 +69,33 @@ const Keyboard = ({ rows }) => {
             }));
         });
     };
+    
+    const validateWord = () => {
+        const currentRow = state.board[counterRows];
+        const isCorrect = currentRow.join("") === solution;
+        const isLastRow = counterRows === rows - 1;
+
+        if (isCorrect) {
+            setState((prevState) => ({
+                ...prevState,
+                guessed: true,
+                guessedRow: counterRows,
+            }));
+        }
+    }
 
     const handleEnter = () => {
         const currentRow = state.board[counterRows];
         if (currentRow.length === solution.length) {
-            setCounterRows(counterRows + 1);
-
-            if (counterRows >= rows) {
-                return;
-            }
-
             updateKeyColors();
-            setState((prevState) => ({
-                ...prevState,
-                board: [...prevState.board, []],
-            }));
+            setCounterRows((prevCounter) => prevCounter + 1);
+            validateWord();
+            if (counterRows < rows - 1) {
+                setState((prevState) => ({
+                    ...prevState,
+                    board: [...prevState.board, []], // Agrega una nueva fila
+                }));
+            }
         }
     };
 
@@ -79,8 +107,10 @@ const Keyboard = ({ rows }) => {
                         <button
                             key={key}
                             className="keyboardKey"
-                            onClick={
-                                key === "Enter" ? handleEnter : handleInput
+                            onClick={() =>
+                                key === "Enter"
+                                    ? handleEnter()
+                                    : handleInput(key)
                             }
                             color-key={colorKey[key]}
                         >

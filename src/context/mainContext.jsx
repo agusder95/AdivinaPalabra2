@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { createContext } from "react";
+import { useEffect, useState, createContext } from "react";
+
 
 const MainContext = createContext();
 
@@ -7,8 +7,8 @@ export const MainContextProvider = ({ children }) => {
     const initialState = JSON.parse(localStorage.getItem("gameState")) || {
         typeGame: "",
         word: "",
-        score: null,
-        correctWords: null,
+        guessed: false,
+        guessedRow: 0,
         board: [[]],
         colorBoard: [],
     };

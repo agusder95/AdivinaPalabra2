@@ -11,7 +11,7 @@ const MyRoutes = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/normalMode' element={<NormalMode />} />
+          <Route path='/normal' element={<NormalMode />} />
         </Routes>
       </Suspense>
     </Router>

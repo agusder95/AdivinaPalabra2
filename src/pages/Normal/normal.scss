@@ -6,4 +6,47 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
+}
+
+.correctWordWrapper{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(39, 39, 39, 0.753);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .correctWordContainer{
+        width: 50%;
+        height: 30%;
+        background-color: red;
+        border: 1px solid rgb(87, 87, 87);
+        border-radius: 10px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .buttonsCorrectWord{
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 10px;
+
+            button{
+                width: 40%;
+                height: 40px;
+                border: none;
+                border-radius: 10px;
+                background-color: rgb(87, 87, 87);
+                color: white;
+                font-size: 1.2rem;
+                cursor: pointer;
+            }
+        }
+    }
 }
